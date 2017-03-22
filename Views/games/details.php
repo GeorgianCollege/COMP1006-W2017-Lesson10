@@ -1,7 +1,7 @@
 <?php
-include_once('../Users/is_authenticated.php');
+include_once('Users/is_authenticated.php');
 //include_once('../Config/database.php'); // include the database connection file
-include_once('../Controllers/games.php');
+include_once('Controllers/games.php');
 
 $gameID = $_GET["gameID"]; // assigns the gameID from the URL
 
@@ -13,19 +13,13 @@ if($gameID == 0) {
     $game = GetGameById($gameID);
 }
 
-$title = "Game Details";
-
 ?>
-
-<?php include_once('../Views/partials/header.php'); ?>
-
-<?php include_once('../Views/partials/navbar.php'); ?>
 
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <h1>Game Details</h1>
-            <form action="update_database.php" method="post">
+            <form action="index.php?pageId=GameUpdate" method="post">
                 <div class="form-group">
                     <label for="IDTextField" hidden>Game ID</label>
                     <input type="hidden" class="form-control" id="IDTextField" name="IDTextField"
@@ -43,7 +37,7 @@ $title = "Game Details";
                 </div>
                     <input type="hidden" name="isAddition" value="<?php echo $isAddition; ?>">
                 <button type="submit" id="SubmitButton" class="btn btn-primary">Submit</button>
-                <a href=<?php echo $localRoot ?>>
+                <a href="index.php?pageId=GamesList">
                     <input type="button" class="btn btn-warning" value="Cancel"/>
                 </a>
 
@@ -53,6 +47,4 @@ $title = "Game Details";
     </div>
 </div>
 
-
-<?php include_once('../Views/partials/footer.php'); ?>
 

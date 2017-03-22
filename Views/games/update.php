@@ -1,7 +1,7 @@
 <?php
-include_once('../Users/is_authenticated.php');
-include_once('../Config/database.php');
-include_once('../Controllers/games.php');
+include_once('Users/is_authenticated.php');
+include_once('Config/database.php');
+include_once('Controllers/games.php');
 
 $isAddition = filter_input(INPUT_POST, "isAddition");
 $gameName = filter_input(INPUT_POST, "NameTextField"); //$_POST["NameTextField"];
@@ -16,5 +16,5 @@ else {
 }
 
 // redirect to index page
-header('Location: ../index.php');
+header('Location: index.php?pageId=GamesList');
 ?>

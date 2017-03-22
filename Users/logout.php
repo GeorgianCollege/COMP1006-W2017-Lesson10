@@ -4,9 +4,9 @@
         $_SESSION = Array();
         session_destroy();
         // if everything good go to index page
-        header('Location: ../Users/login.php');
+        header('Location: index.php?pageId=Login');
     }
     else {
-        header('Location: ../index.php');
+        header('Location: index.php');
     }
  ?>

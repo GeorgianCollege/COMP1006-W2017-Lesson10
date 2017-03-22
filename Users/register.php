@@ -1,9 +1,9 @@
 <?php
 
-include_once('../Models/User.php');
+include_once('Models/User.php');
 
 if(isset($_POST["username"])){
-    include_once('../Config/database.php');
+    include_once('Config/database.php');
 
     $username = $_POST["username"];
     // TODO: check for unique username
@@ -22,7 +22,7 @@ if(isset($_POST["username"])){
         $statement->closeCursor();
 
         // if everything good go to index page
-        header('Location: ../index.php');
+        header('Location: index.php');
     }
     catch(Exception $e) {
         $messages = $e->getMessage();
@@ -36,10 +36,6 @@ $title = "Register";
 
 ?>
 
-<?php include_once('../Views/partials/header.php'); ?>
-
-<?php include_once('../Views/partials/navbar.php'); ?>
-
 <!-- Render the Registration form  -->
 	<main class="container">
 	<!-- Display flash messages  -->
@@ -50,7 +46,7 @@ $title = "Register";
 		<div class="row">
             <div class="col-md-offset-4 col-md-4">
                 <h1>User Registration</h1>
-                <form method="post" action="register.php">
+                <form method="post" action="index.php?pageId=Register">
                     <fieldset class="form-group">
                         <label for="username">Username: *</label>
                         <input name="username" type="text" class="form-control" required />
@@ -65,7 +61,7 @@ $title = "Register";
                     </fieldset>
                     <fieldset class="form-group text-right">
                         <input type="submit" class="btn btn-success" value="Submit"/>
-                        <a href="/">
+                        <a href="index.php">
                             <input type="button" class="btn btn-warning" value="Cancel"/>
                         </a>
                     </fieldset>
@@ -73,5 +69,3 @@ $title = "Register";
             </div>
         </div>
 	</main>
-
-<?php include_once('../Views/partials/footer.php'); ?>

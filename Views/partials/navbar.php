@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,12 +19,12 @@
             <ul class="nav navbar-nav navbar-right">
 
 
-                <li class=<?php echo ($title == "Home") ? "active" : "" ?>><a href=<?php echo $localRoot . "index.php" ?>><i class="fa fa-home fa-lg"></i> Home</a></li>
+                <li class=<?php echo ($title == "Home") ? "active" : "" ?>><a href="index.php"><i class="fa fa-home fa-lg"></i> Home</a></li>
 
                 <?php if(isset($_SESSION["is_logged_in"])) : ?>
-                    <li><a href=<?php echo $localRoot . "Users/logout.php"?>><i class="fa fa-sign-out fa-lg" ></i> Logout</a></li>
+                    <li><a href=index.php?pageId=Logout><i class="fa fa-sign-out fa-lg" ></i> Logout</a></li>
                 <?php else: ?>
-                    <li class=<?php echo ($title == "Login") ? "active" : "" ?>><a href=<?php echo $localRoot . "Users/login.php"?>><i class="fa fa-sign-in fa-lg" ></i> Login</a></li>
+                    <li class=<?php echo ($title == "Login") ? "active" : "" ?>><a href="index.php?pageId=Login"><i class="fa fa-sign-in fa-lg" ></i> Login</a></li>
                 <?php endif ?>
             </ul>
         </div><!-- /.navbar-collapse -->

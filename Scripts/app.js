@@ -4,7 +4,7 @@
 
         if(!confirm("Are You Sure?")) {
             event.preventDefault();
-            window.location.assign("./index.php");
+            window.location.assign("index.php?pageId=GamesList");
         }
     });
 })();

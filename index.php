@@ -1,47 +1,65 @@
 <?php
-require_once('Controllers/games.php');
 
-$games = ReadGames();
+if(!isset($_GET["pageId"])) {
+    $title = "Home";
+    $templateString = 'Views/dashboard.php';
+}
+else {
+    switch($_GET["pageId"]) {
+        case "About":
+            $title = "About";
+            $templateString = 'Views/content/about.php';
+            break;
+        case "Contact":
+            $title = "Contact";
+            $templateString = 'Views/content/contact.php';
+            break;
+        case "Login":
+            $title = "Login";
+            $templateString = 'Users/login.php';
+            break;
+        case "Logout":
+            $title = "Logout";
+            $templateString = 'Users/logout.php';
+            break;
+        case "Register":
+            $title = "Register";
+            $templateString = 'Users/register.php';
+            break;
+        case "GamesList":
+            $title = "Games";
+            $templateString = 'Views/games/list.php';
+            break;
+        case "GameDetails";
+            if($_GET["gameID"]==0) {
+                $title = "Add Game";
+            }
+            else {
+                $title = "Edit Game";
+            }
+            $templateString = 'Views/games/details.php';
+            break;
+        case "GameUpdate":
+            $title = "Update Game";
+            $templateString = 'Views/games/update.php';
+            break;
+        case "GameDelete":
+            $title = "Delete Game";
+            $templateString = 'Views/games/delete.php';
+            break;
 
-$title = "Home";
+        default:
+            $title = "404";
+            $templateString = "Views/errors/404.php";
+            break;
+    }
+}
 ?>
 
 <?php include_once('Views/partials/header.php'); ?>
 
 <?php include_once ('Views/partials/navbar.php'); ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <h1>Games List</h1>
-            <a class="btn btn-primary" href="Game/game_details.php?gameID=0">
-                <i class="fa fa-plus"></i> Add New Game</a>
-            <br>
-            <table class="table table-striped table-hover table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Cost</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                    <?php foreach($games as $game) : ?>
-                        <tr>
-                            <td><?php echo $game['Id'] ?></td>
-                            <td><?php echo $game['Name'] ?></td>
-                            <td><?php echo $game['Cost'] ?></td>
-                            <!-- This line sends the gameID to the game_details page -->
-
-                            <td><a class="btn btn-primary" href="Game/game_details.php?gameID=<?php echo $game['Id'] ?>"><i class="fa fa-pencil-square-o"></i> Edit</a></td>
-
-                            <td><a class="btn btn-danger" href="Game/game_delete.php?gameID=<?php echo $game['Id'] ?>"><i class="fa fa-trash-o"></i> Delete</a></td>
-                        </tr>
-                    <?php endforeach; ?>
-
-            </table>
-
-        </div>
-    </div>
-</div>
+<?php require($templateString); ?>
 
 <?php include_once ('Views/partials/footer.php');

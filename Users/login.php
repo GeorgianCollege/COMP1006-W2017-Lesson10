@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST["username"])){
-    include_once('../Config/database.php');
+    include_once('Config/database.php');
     try{
         $db = DBConnection();
         $username = $_POST["username"];
@@ -14,10 +14,10 @@ if(isset($_POST["username"])){
         $statement->execute(); // run on the db server
         if($statement->rowCount() == 1) {
             $statement->closeCursor(); // close the connection
-
+            session_start();
             $_SESSION["is_logged_in"] = true;
             // if everything good go to index page
-            header('Location: ../index.php');
+            header('Location: index.php');
         }
         else {
             $statement->closeCursor(); // close the connection
@@ -35,10 +35,6 @@ else {
 $title = "Login";
 ?>
 
-<?php include_once('../Views/partials/header.php'); ?>
-
-<?php include_once('../Views/partials/navbar.php'); ?>
-
 <main class="container">
     <?php if ($messages != "") : ?>
         <div class="alert alert-danger"><?php echo $messages ?></div>
@@ -46,7 +42,7 @@ $title = "Login";
       <div class="row">
         <div class="col-md-offset-4 col-md-4">
            <h1>Please Login</h1>
-           <form method="post" action="login.php">
+           <form method="post" action="index.php?pageId=Login">
                 <fieldset class="form-group">
                     <label>Username:</label>
                     <input type="text" class="form-control" name="username" required autofocus/>
@@ -54,11 +50,11 @@ $title = "Login";
                  <fieldset class="form-group">
                     <label>Password:</label>
                     <input type="password" class="form-control" name="password" required/>
-                    or <a href="register.php">Register</a>
+                    or <a href="index.php?pageId=Register">Register</a>
                 </fieldset>
                 <fieldset class="form-group text-right">
                     <input type="submit" class="btn btn-success" value="Log In"/>
-                    <a href=<?php echo $localRoot ?>>
+                    <a href="index.php">
                         <input type="button" class="btn btn-warning" value="Cancel"/>
                     </a>
                </fieldset>
@@ -66,5 +62,3 @@ $title = "Login";
          </div>
       </div>
     </main>
-
-<?php include_once('../Views/partials/footer.php'); ?>

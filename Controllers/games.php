@@ -1,7 +1,5 @@
 <?php
-$localRoot = dirname(__DIR__);
-
-include_once($localRoot . "/Config/database.php");
+include_once("Config/database.php");
 
 function _executeAndClose($statement) {
     $statement->execute(); // run on the db server
